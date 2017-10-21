@@ -1,0 +1,23 @@
+
+iversion: 2
+jobs:
+  build:
+    docker:
+      - image: base/archlinux
+    steps:
+      - checkout
+      - run:
+          name: Update
+          command: pacman -Syu --noconfirm
+      - run:
+          name: Install
+          command: pacman -S clang --noconfirm
+      - run:
+          name: Install
+          command: pacman -S make --noconfirm
+      - run:
+          name: Install
+          command: pacman -S kotlin --noconfirm
+      - run:
+          name: Install
+          command: pacman -S java-8-openjdk --noconfirm
