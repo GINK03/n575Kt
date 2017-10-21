@@ -20,7 +20,7 @@ jobs:
           command: pacman -S kotlin --noconfirm
       - run:
           name: Install
-          command: pacman -S java-8-openjdk --noconfirm
+          command: pacman -S jdk8-openjdk --noconfirm
       - run:
           name: compile 
           command: make
