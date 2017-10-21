@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/GINK03/n575Kt.svg?style=svg)](https://circleci.com/gh/GINK03/n575Kt)
+
 # Natural 575 Detector Kotlin
 
 ## n575を検出します
