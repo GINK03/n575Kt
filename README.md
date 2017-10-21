@@ -49,3 +49,6 @@ $ cat resource/kumodesuga | make run
 蜘蛛型の/魔物っていう/のがあるし
 ...
 ```
+
+## ライセンス
+MIT
