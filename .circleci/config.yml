@@ -24,4 +24,7 @@ jobs:
       - run:
           name: compile 
           command: make
+      - run:
+          name: run test case
+          command: cat resource/kumodesuga | make run
 
