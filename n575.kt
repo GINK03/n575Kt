@@ -14,8 +14,8 @@ fun main(args : Array<String>) {
       Pair(it.getSurface(), it.getAllFeatures()) 
     }.map {
       val (surface, features) = it 
-      //println(features)
-      val kana = features.split(",").last()
+      var kana = features.split(",").last()
+      //listOf("ァ", "ィ", "ゥ", "ェ", "ォ").map { kana = kana.replace(it, "") }
       val noun = features.split(",").first()
       oneLine.add( Triple(surface, kana, noun) )
     }
@@ -26,7 +26,7 @@ fun main(args : Array<String>) {
   contain.map { oneLine ->
     // separater
     val job = thread {
-      val maxDepth = 1000000L
+      val maxDepth = 100000L
       var depth = 0L
       outer@for( i in (0..oneLine.size-1) ) {
         for( k in (i+1..oneLine.size-1) ) {
@@ -40,12 +40,16 @@ fun main(args : Array<String>) {
                   oneLine[k+1].third == "名詞" && oneLine[l].third == "助詞" &&
                   oneLine.slice(l+1..m).map { it.second.length }.sum() == 5 && 
                   oneLine[l+1].third == "名詞"  && (oneLine[m].third == "助詞" || oneLine[m].third == "名詞" ) && oneLine.slice(l+1..m).size > 1 ) {
-                println( oneLine.slice(i..k).map { it.first }.joinToString("") + "/" + 
-                        oneLine.slice(k+1..l).map { it.first }.joinToString("") + "/" +
-                        oneLine.slice(l+1..m).map { it.first }.joinToString("") )
-                //println( oneLine.slice(i..k).map { it.third } )
-                //println( oneLine.slice(k+1..l).map { it.third } )
-                //println( oneLine.slice(l+1..m).map { it.third } )
+                
+                // validation 
+                val sentence1 = oneLine.slice(i..k).map { it.first }.joinToString("") 
+                val sentence2 = oneLine.slice(k+1..l).map { it.first }.joinToString("")
+                val sentence3 = oneLine.slice(l+1..m).map { it.first }.joinToString("")
+
+                val concat = sentence1 + "/" + sentence2 + "/" + sentence3
+                if( sentence1.length > 5 || sentence2.length > 7 || sentence3.length > 5) continue
+                if( concat.contains(",") || concat.contains("、") || concat.contains("・") ) continue
+                println(sentence1 + "/" + sentence2 + "/" + sentence3)
               }
             }
           }
